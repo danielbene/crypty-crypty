@@ -5,4 +5,4 @@ Micro project for funz, and learning. Based on the app idea / user stories defin
 ## Minimalistic text encryptor
 Python based desktop application that encrypts, and decrypts text input with the Vigenere Cipher.
 
-NOTE: install python3-tk
+NOTE: apt install python3-tk
