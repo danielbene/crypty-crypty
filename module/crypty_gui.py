@@ -2,6 +2,7 @@ import tkinter as tk
 from module import crypty_cipher as cip
 
 window = tk.Tk()
+window.title("crypty-crypty")
 window.minsize(1000, 400)
 
 # ----- FRAMES -----
