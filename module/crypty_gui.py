@@ -82,6 +82,9 @@ def init_binds():
     btn_decrypt.bind("<Button-1>",
                      lambda event, mode="dec": crypt(event, mode))
 
+    # enabling copying out text from disabled field
+    txt_output.bind("<1>", lambda event: txt_output.focus_set())
+
 
 def crypt(event, mode):
     # nice-to-have: using other optional ciphers
