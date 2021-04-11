@@ -52,6 +52,8 @@ btn_decrypt = tk.Button(
 
 
 def init_gui():
+    init_binds()
+
     frm_main.pack(fill=tk.BOTH, expand=True)
     frm_enc_key.pack(fill=tk.BOTH)
 
@@ -68,3 +70,21 @@ def init_gui():
     ent_key.pack(fill=tk.BOTH)
 
     window.mainloop()
+
+
+def init_binds():
+    btn_encrypt.bind("<Button-1>", encrypt)
+    btn_compare.bind("<Button-1>", compare)
+    btn_decrypt.bind("<Button-1>", decrypt)
+
+
+def encrypt(event):
+    print("Encrypt pressed")
+
+
+def compare(event):
+    print("Compare pressed")
+
+
+def decrypt(event):
+    print("Decrypt pressed")
