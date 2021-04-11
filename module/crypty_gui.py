@@ -1,4 +1,5 @@
 import tkinter as tk
+from module import crypty_cipher as cip
 
 window = tk.Tk()
 window.minsize(1000, 400)
@@ -51,6 +52,7 @@ btn_decrypt = tk.Button(
 )
 
 
+# nice-to-have: copy to clipboard from output window
 def init_gui():
     init_binds()
 
@@ -73,18 +75,28 @@ def init_gui():
 
 
 def init_binds():
-    btn_encrypt.bind("<Button-1>", encrypt)
+    # <Button-1> event represents LMB click
     btn_compare.bind("<Button-1>", compare)
-    btn_decrypt.bind("<Button-1>", decrypt)
+    btn_encrypt.bind("<Button-1>",
+                     lambda event, mode="enc": crypt(event, mode))
+    btn_decrypt.bind("<Button-1>",
+                     lambda event, mode="dec": crypt(event, mode))
 
 
-def encrypt(event):
-    print("Encrypt pressed")
+def crypt(event, mode):
+    # nice-to-have: using other optional ciphers
+    text = txt_input.get("1.0", tk.END)
+    key = ent_key.get()
+
+    txt_output.config(state=tk.NORMAL)
+    txt_output.delete("1.0", tk.END)
+    if mode == "enc":
+        txt_output.insert("1.0", cip.encrypt_vigenere(text, key))
+    else:
+        txt_output.insert("1.0", cip.decrypt_vigenere(text, key))
+    txt_output.config(state=tk.DISABLED)
 
 
 def compare(event):
+    # nice-to-have: this. do it at the end
     print("Compare pressed")
-
-
-def decrypt(event):
-    print("Decrypt pressed")
