@@ -1,5 +1,5 @@
 import tkinter as tk
-from module import crypty_cipher as cip
+from module.cipher.vinegere import Vinegere
 
 window = tk.Tk()
 window.title("crypty-crypty")
@@ -88,16 +88,20 @@ def init_binds():
 
 
 def crypt(event, mode):
-    # nice-to-have: using other optional ciphers
+    # nice-to-have: using other ciphers
     text = txt_input.get("1.0", tk.END)
     key = ent_key.get()
+    vin = Vinegere(text, key)
 
     txt_output.config(state=tk.NORMAL)
     txt_output.delete("1.0", tk.END)
+
     if mode == "enc":
-        txt_output.insert("1.0", cip.encrypt_vigenere(text, key))
+        output = vin.encrypt()
     else:
-        txt_output.insert("1.0", cip.decrypt_vigenere(text, key))
+        output = vin.decrypt()
+
+    txt_output.insert("1.0", output)
     txt_output.config(state=tk.DISABLED)
 
 
