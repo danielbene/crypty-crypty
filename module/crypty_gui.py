@@ -1,5 +1,5 @@
 import tkinter as tk
-from module.cipher.vinegere import Vinegere
+from module.cipher.vigenere import Vigenere
 
 window = tk.Tk()
 window.title('crypty-crypty')
@@ -95,15 +95,15 @@ def crypt(event, mode):
     # nice-to-have: using other ciphers
     text = txt_input.get('1.0', tk.END)
     key = ent_key.get()
-    vin = Vinegere(text, 'a' if len(key) == 0 else key)
+    vig = Vigenere(text, 'a' if len(key) == 0 else key)
 
     txt_output.config(state=tk.NORMAL)
     txt_output.delete('1.0', tk.END)
 
     if mode == 'enc':
-        output = vin.encrypt()
+        output = vig.encrypt()
     else:
-        output = vin.decrypt()
+        output = vig.decrypt()
 
     txt_output.insert('1.0', output)
     txt_output.config(state=tk.DISABLED)

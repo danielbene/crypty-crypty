@@ -4,7 +4,7 @@ supported_chars = 'aAáÁbBcCdDeEéÉfFgGhHiIíÍjJkKlLmMnNoOóÓöÖőŐpPqQrRs
                     'úÚüÜűŰvVwWxXyYzZ ,.!?#@[]&'
 
 
-class Vinegere:
+class Vigenere:
     def __init__(self, text, key):
         self.text = text.strip()
         self.key = key.strip()
