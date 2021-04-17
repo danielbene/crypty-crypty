@@ -1,5 +1,5 @@
 # you can play around with the order and composition of the chars
-# to improve complexity
+# to slightly improve complexity
 supported_chars = 'aAáÁbBcCdDeEéÉfFgGhHiIíÍjJkKlLmMnNoOóÓöÖőŐpPqQrRsStTuU' + \
                     'úÚüÜűŰvVwWxXyYzZ ,.!?#@[]&'
 

@@ -2,7 +2,7 @@ import tkinter as tk
 from module.cipher.vinegere import Vinegere
 
 window = tk.Tk()
-window.title("crypty-crypty")
+window.title('crypty-crypty')
 window.minsize(1000, 400)
 
 # ----- FRAMES -----
@@ -25,29 +25,29 @@ frm_enc_key = tk.Frame(
 
 # ----- WIDGETS -----
 txt_input = tk.Text(master=frm_main, width=50, height=15)
-txt_output = tk.Text(master=frm_main, width=50, height=15, bg="lightgrey")
+txt_output = tk.Text(master=frm_main, width=50, height=15, bg='lightgrey')
 txt_output.config(state=tk.DISABLED)
-lbl_key = tk.Label(master=frm_enc_key, text="Encryption key:")
+lbl_key = tk.Label(master=frm_enc_key, text='Encryption key:')
 ent_key = tk.Entry(master=frm_enc_key)
 
 # ----- BUTTONS -----
 btn_encrypt = tk.Button(
     master=frm_buttons,
-    text="Encrypt",
+    text='Encrypt',
     width=10,
     height=3
 )
 
 btn_compare = tk.Button(
     master=frm_buttons,
-    text="Compare",
+    text='Compare',
     width=10,
     height=3
 )
 
 btn_decrypt = tk.Button(
     master=frm_buttons,
-    text="Decrypt",
+    text='Decrypt',
     width=10,
     height=3
 )
@@ -77,34 +77,42 @@ def init_gui():
 
 def init_binds():
     # <Button-1> event represents LMB click
-    btn_compare.bind("<Button-1>", compare)
-    btn_encrypt.bind("<Button-1>",
-                     lambda event, mode="enc": crypt(event, mode))
-    btn_decrypt.bind("<Button-1>",
-                     lambda event, mode="dec": crypt(event, mode))
+    btn_compare.bind('<Button-1>', compare)
+
+    # event is always passed by the bind so it has to be handled by the lambda
+    btn_encrypt.bind('<Button-1>',
+                     lambda event, mode='enc': crypt(event, mode))
+    btn_decrypt.bind('<Button-1>',
+                     lambda event, mode='dec': crypt(event, mode))
 
     # enabling copying out text from disabled field
-    txt_output.bind("<1>", lambda event: txt_output.focus_set())
+    txt_output.bind('<1>', lambda event: txt_output.focus_set())
+    # enabling ctrl-a select all - aplies to both text field somehow
+    txt_input.bind_class('Text', '<Control-a>', select_all)
 
 
 def crypt(event, mode):
     # nice-to-have: using other ciphers
-    text = txt_input.get("1.0", tk.END)
+    text = txt_input.get('1.0', tk.END)
     key = ent_key.get()
-    vin = Vinegere(text, key)
+    vin = Vinegere(text, 'a' if len(key) == 0 else key)
 
     txt_output.config(state=tk.NORMAL)
-    txt_output.delete("1.0", tk.END)
+    txt_output.delete('1.0', tk.END)
 
-    if mode == "enc":
+    if mode == 'enc':
         output = vin.encrypt()
     else:
         output = vin.decrypt()
 
-    txt_output.insert("1.0", output)
+    txt_output.insert('1.0', output)
     txt_output.config(state=tk.DISABLED)
 
 
 def compare(event):
     # nice-to-have: this. do it at the end
-    print("Compare pressed")
+    print('Compare pressed')
+
+
+def select_all(event):
+    event.widget.tag_add('sel', '1.0', 'end')
