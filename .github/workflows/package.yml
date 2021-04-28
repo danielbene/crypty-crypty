@@ -8,18 +8,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
+    container: 
+      image: cdrx/pyinstaller-windows:python3
+      options: -v &{pwd}:/src/
 
     steps:
     - uses: actions/checkout@v2
-    - name: check environment
-      run: |
-        python3 --version
-        docker --version
-        git status
-        pwd
-        ls -la
-        
-    - name: package
-      uses: JackMcKew/pyinstaller-action-windows@v0.1.2
-      with:
-        path: ${pwd}
+    - run: pwd
