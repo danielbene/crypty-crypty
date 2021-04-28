@@ -20,6 +20,6 @@ jobs:
         ls -la
         
     - name: package
-      uses: action/pyinstaller-windows@main
+      uses: JackMcKew/pyinstaller-action-windows@v0.1.2
       with:
         path: ${pwd}
