@@ -17,3 +17,9 @@ jobs:
         docker --version
         git status
         pwd
+        
+    - name: package
+      run: docker run -v "${pwd}:/src/" cdrx/pyinstaller-windows:python3 "pyinstaller --onefile crypty.py"
+      
+    - name: search
+      run: ls -la
