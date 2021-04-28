@@ -1,0 +1,18 @@
+name: Build with pyinstaller than release package
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: test
+      run: |
+        python3 --version
+        docker --version
+        git status
