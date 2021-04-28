@@ -11,8 +11,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: test
+    - name: check environment
       run: |
         python3 --version
         docker --version
         git status
+        pwd
