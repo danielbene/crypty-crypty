@@ -9,10 +9,15 @@ jobs:
 
     runs-on: ubuntu-latest
     
-    container: 
-      image: cdrx/pyinstaller-windows:python3
-      options: -v ${pwd}:/src/
-
     steps:
     - uses: actions/checkout@v2
-    - run: pwd
+
+    - name: Package Application
+      uses: JackMcKew/pyinstaller-action-windows@main
+      with:
+        path: src
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: crypty
+        path: src/dist/windows
