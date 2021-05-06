@@ -10,12 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v2
+    - name: checkout
+      uses: actions/checkout@v2
     
-    - run: |
+    - name: pyinstaller
+      run: |
         docker run -v "/home/runner/work/crypty-crypty/crypty-crypty:/src/" cdrx/pyinstaller-windows:python3 "pyinstaller --onefile crypty.py"
     
-    - uses: actions/upload-artifact@v2
+    - name: release
+      uses: softprops/action-gh-release@v1
       with:
-        name: crypty-win
-        path: /home/runner/work/crypty-crypty/crypty-crypty/dist/crypty.exe
+        files: /home/runner/work/crypty-crypty/crypty-crypty/dist/crypty.exe
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
