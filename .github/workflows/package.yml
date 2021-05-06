@@ -20,6 +20,7 @@ jobs:
     - name: release
       uses: softprops/action-gh-release@v1
       with:
+        tag_name: test
         files: /home/runner/work/crypty-crypty/crypty-crypty/dist/crypty.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
