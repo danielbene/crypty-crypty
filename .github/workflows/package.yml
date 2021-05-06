@@ -11,6 +11,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
+    
+    - run: export PYTHONPATH=${pwd}
 
     - name: Package Application
       uses: JackMcKew/pyinstaller-action-windows@main
