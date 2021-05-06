@@ -13,8 +13,7 @@ jobs:
     - uses: actions/checkout@v2
     
     - run: |
-        export PYTHONPATH=${pwd}
-        docker run -v "${pwd}:/src/" cdrx/pyinstaller-windows:python3 "pyinstaller --onefile crypty.py"
         pwd
         ls -l
-        
+        export PYTHONPATH=${pwd}
+        docker run -v "${pwd}:/src/" cdrx/pyinstaller-windows:python3 "pyinstaller --onefile crypty.py" 
