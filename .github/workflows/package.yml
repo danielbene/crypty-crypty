@@ -12,14 +12,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - run: export PYTHONPATH=${pwd}
-
-    - name: Package Application
-      uses: JackMcKew/pyinstaller-action-windows@main
-      with:
-        path: .
-
-    - uses: actions/upload-artifact@v2
-      with:
-        name: crypty
-        path: src/dist/windows
+    - run: |
+        export PYTHONPATH=${pwd}
+        docker run -v "${pwd}:/src/" cdrx/pyinstaller-windows:python3 "pyinstaller --onefile crypty.py"
+        pwd
+        ls -l
+        
