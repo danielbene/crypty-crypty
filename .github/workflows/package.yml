@@ -19,10 +19,9 @@ jobs:
     - name: pyinstaller
       run: |
         docker run -v "${REPO_PATH}:/src/" cdrx/pyinstaller-windows:python3 "pyinstaller --onefile --windowed crypty.py"
-        mkdir ${REPO_PATH}/win
-        cp ${REPO_PATH}/dist/crypty.exe ${REPO_PATH}/win/crypty-win.exe
+        mkdir ${REPO_PATH}/win && cp ${REPO_PATH}/dist/crypty.exe ${REPO_PATH}/win/crypty-win.exe
         docker run -v "${REPO_PATH}:/src/" cdrx/pyinstaller-linux:python3 "pyinstaller --onefile --windowed crypty.py"
-        mv ${REPO_PATH}/dist/crypty ${REPO_PATH}/dist/crypty-linux
+        mkdir ${REPO_PATH}/nix && cp ${REPO_PATH}/dist/crypty ${REPO_PATH}/nix/crypty-linux
     
     - name: delete last release
       uses: ame-yu/action-delete-latest-release@v2
@@ -36,6 +35,6 @@ jobs:
         tag_name: test
         files: |
           ${REPO_PATH}/win/crypty-win.exe
-          ${REPO_PATH}/dist/crypty-linux
+          ${REPO_PATH}/nix/crypty-linux
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
