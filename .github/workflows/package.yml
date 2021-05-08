@@ -16,6 +16,7 @@ jobs:
     - name: pyinstaller
       run: |
         docker run -v "/home/runner/work/crypty-crypty/crypty-crypty:/src/" cdrx/pyinstaller-windows:python3 "pyinstaller --onefile --windowed crypty.py"
+        mkdir /home/runner/work/crypty-crypty/crypty-crypty/win
         cp /home/runner/work/crypty-crypty/crypty-crypty/dist/crypty.exe /home/runner/work/crypty-crypty/crypty-crypty/win/crypty.exe
         docker run -v "/home/runner/work/crypty-crypty/crypty-crypty:/src/" cdrx/pyinstaller-linux:python3 "pyinstaller --onefile --windowed crypty.py"
     
