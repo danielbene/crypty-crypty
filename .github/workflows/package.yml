@@ -15,7 +15,7 @@ jobs:
     
     - name: pyinstaller
       run: |
-        docker run -v "/home/runner/work/crypty-crypty/crypty-crypty:/src/" cdrx/pyinstaller-windows:python3 "pyinstaller --onefile crypty.py"
+        docker run -v "/home/runner/work/crypty-crypty/crypty-crypty:/src/" cdrx/pyinstaller-windows:python3 "pyinstaller --onefile --windowed crypty.py"
     
     - name: delete last release
       uses: ame-yu/action-delete-latest-release@v2
