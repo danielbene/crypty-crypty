@@ -9,16 +9,20 @@ jobs:
 
     runs-on: ubuntu-latest
     
+    env:
+      REPO_PATH: /home/runner/work/crypty-crypty/crypty-crypty
+    
     steps:
     - name: checkout
       uses: actions/checkout@v2
     
     - name: pyinstaller
       run: |
-        docker run -v "/home/runner/work/crypty-crypty/crypty-crypty:/src/" cdrx/pyinstaller-windows:python3 "pyinstaller --onefile --windowed crypty.py"
-        mkdir /home/runner/work/crypty-crypty/crypty-crypty/win
-        cp /home/runner/work/crypty-crypty/crypty-crypty/dist/crypty.exe /home/runner/work/crypty-crypty/crypty-crypty/win/crypty.exe
-        docker run -v "/home/runner/work/crypty-crypty/crypty-crypty:/src/" cdrx/pyinstaller-linux:python3 "pyinstaller --onefile --windowed crypty.py"
+        docker run -v "${REPO_PATH}:/src/" cdrx/pyinstaller-windows:python3 "pyinstaller --onefile --windowed crypty.py"
+        mkdir ${REPO_PATH}/win
+        cp ${REPO_PATH}/dist/crypty.exe ${REPO_PATH}/win/crypty-win.exe
+        docker run -v "${REPO_PATH}:/src/" cdrx/pyinstaller-linux:python3 "pyinstaller --onefile --windowed crypty.py"
+        mv ${REPO_PATH}/dist/crypty ${REPO_PATH}/dist/crypty-linux
     
     - name: delete last release
       uses: ame-yu/action-delete-latest-release@v2
@@ -31,7 +35,7 @@ jobs:
         body: Simple test release on main pushes for learning Github CI.
         tag_name: test
         files: |
-          /home/runner/work/crypty-crypty/crypty-crypty/win/crypty.exe
-          /home/runner/work/crypty-crypty/crypty-crypty/dist/crypty
+          ${REPO_PATH}/win/crypty-win.exe
+          ${REPO_PATH}/dist/crypty-linux
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
